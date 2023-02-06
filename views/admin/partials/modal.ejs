@@ -1,0 +1,432 @@
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.ejs">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--New Election Modal-->
+<div class="modal fade" id="electionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Election</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="/new_election" method="POST">
+                    <div class="form-group">
+                        <label for="title" class="label">Title:</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Election Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="label">Description:</label>
+                        <textarea name="name" id="name" class="form-control" cols="20" rows="8" placeholder="Election Descriptiom" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="label" for="gender">Status:</label>
+                        <select name="status" class="form-control" disabled>
+                            <!--option selected disabled>Select</option-->
+                            <option>inActive</option>
+                            <option>Active</option>
+                          </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+
+
+</div>
+
+
+<!--New user Modal-->
+<div class="modal fade" id="voterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Voter</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="/new_voter" method="POST" enctype="multipart/form-data">
+                    <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="name">Full Name</label>
+                                      <input type="text" name="name" class="form-control" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="gender">Gender</label>
+                                    <select name="gender" class="form-control" required>
+                                        <!--option selected disabled>Select</option-->
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="dept">Department</label>
+                                    <select name="dept" class="form-control" required>
+                                        <!--option selected disabled>Select</option-->
+                                        <option>Computer</option>
+                                        <option>Physics</option>
+                                        <option>Mathematics</option>
+                                        <option>Engineering</option>
+                                        <option>Medicine & Surgery</option>
+                                        <option>Mining</option>
+                                        <option>Architecture</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="phone">Phone No.</label>
+                                      <input type="tel" name="phone" class="form-control" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="email">Email/Username</label>
+                                      <input type="email" name="email" class="form-control" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="password">Password</label>
+                                      <input type="password" name="password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pb-1">
+                                <div class="form-group">
+                                      <label class="label" for="dob">Date of Birth</label>
+                                      <input type="date" name="dob" class="form-control" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="photo">Photo</label>
+                                      <input type="file" name="photo" class="form-control">
+                                  </div>
+                            </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+                </form>    
+        </div>
+    </div>
+</div>
+
+<!--user edit Modal-->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--form class="user" action="/user/update" method="POST" enctype="multipart/form-data"-->
+                    <div class="row mb-3">
+                        <input type="hidden" name="id" id="editUserId">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="name">Full Name</label>
+                                      <input type="text" name="name" id="editUserName" class="form-control" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="gender">Gender</label>
+                                    <select name="gender" class="form-control" id="editUserGender" required>
+                                        <!--option selected disabled>Select</option-->
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pb-1">
+                                <div class="form-group">
+                                      <label class="label" for="dob">Date of Birth</label>
+                                      <input type="date" name="dob" class="form-control" id="editUserDob" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="faculty">Faculty</label>
+                                    <select name="faculty" class="form-control" id="editUserFaculty" onchange="get_faculty_depts(this, '#editUserDept');" required></select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="dept">Department</label>
+                                    <select name="dept" class="form-control" id="editUserDept" required></select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="phone">Phone No.</label>
+                                      <input type="tel" name="phone" class="form-control" id="editUserPhone" required>
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="email">Email/Username</label>
+                                      <input type="email" name="email" class="form-control" id="editUserMail" required>
+                                  </div>
+                            </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" onclick="edit_user_post()" value="Submit">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+                <!--/form-->
+        </div>
+    </div>
+</div>
+
+<!--New faculty Modal-->
+<div class="modal fade" id="facultyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Faculty</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="user" action="/new_faculty" method="POST">
+                            <div class="form-group">
+                                <label for="name" class="label">Faculty:</label>
+                                <input type="text" name="name" id="newF_name" class="form-control" placeholder="Enter New Faculty's Name" required>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>    
+                </div>
+            </div>
+</div>
+
+<!--Edit faculty Modal-->
+<div class="modal fade" id="editFacultyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Faculty</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="user" action="/faculty/update" method="POST">
+                            <div class="form-group">
+                                <input type="hidden" id="editF_id" name="id">
+                                <label for="name" class="label">Faculty:</label>
+                                <input type="text" name="name" id="editF_name" class="form-control" placeholder="Enter New Faculty's Name" required>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>    
+                </div>
+            </div>
+</div>
+
+<!--New department Modal-->
+<div class="modal fade" id="departmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Department</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--form class="user" action="/new_department" method="POST"-->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="faculty" class="label">Faculty:</label>
+                                        <select name="f_name" class="form-control" id="newDeptFaculty" >
+                                            <option disabled selected>Select a Faculty</option>
+                                        </select>
+                                    </div>                                    
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name" class="label">Department:</label>
+                                        <input type="text" name="name" id="newDeptName" class="form-control" placeholder="Enter New Department's Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" onclick="create_dept();" value="Submit">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                <!--/form-->    
+                </div>
+            </div>
+</div>
+
+<!--edit department Modal-->
+<div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Department</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--form class="user" action="/department/update" method="POST"-->
+                            <div class="row">
+                                <input type="hidden" name="id" id="editDeptId">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="faculty" class="label">Faculty:</label>
+                                        <select name="f_id" class="form-control editDeptF " id="editDeptFaculty" >
+                                        </select>
+                                    </div>                                    
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name" class="label">Department:</label>
+                                        <input type="text" name="name" id="editDeptName" class="form-control" placeholder="Enter New Department's Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" onclick="update_dept()" value="Submit">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                <!--/form-->
+                </div>
+            </div>
+</div>
+
+<!--New Position Modal-->
+<div class="modal fade" id="positionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Position</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="user" action="/new_position" method="POST">
+                            <div class="form-group">
+                                <label for="name" class="label">Position:</label>
+                                <input type="text" name="name" id="newPosName" class="form-control" placeholder="Enter New Position's Name" required>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>    
+                </div>
+            </div>
+</div>
+
+
+<!--change Password Modal-->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button class="close" type="button" data-dismiss="modal"  aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form action="/change/pass" method="post">
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="hidden" name="id" id="voterId">
+                                    <input type="text" name="name" id="voterName" class="form-control" disabled>
+                                </div>                            
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="userNewPass" class="label">New Password</label>
+                                    <input type="password" name="userNewPass" id="userNewPass" class="form-control" required>                        
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="confirmUserNewPass" class="label">Re-enter Password</label>
+                                    <input type="password" name="confirmUserNewPass" id="confirmUserNewPass" class="form-control" required>
+                                    <div id="confirmUserNewPassTxt"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" id="changePassBtnS" value="Submit" disabled >
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/admin.js"></script>
+

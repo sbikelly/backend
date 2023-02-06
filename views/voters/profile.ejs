@@ -1,0 +1,227 @@
+
+
+<div class="container-fluid">
+
+     <!-- Page Heading -->
+    <nav aria-label="breadcrumb row">
+        <ol class="breadcrumb ">
+            <li class="breadcrumb-item col-sm-"><a href="/index">Home</a></li>            
+            <li class="breadcrumb-item  col-sm-9 text-left active" aria-current="page">Profile</li>
+            
+            <a href="/index" class=" float-right col-sm-2 btn btn-sm btn-primary">
+                <i class="fas fa-arrow-left text-white-100"></i> Back</a>
+        </ol>        
+    </nav>
+    <hr>
+
+    <div class="profile-page">
+
+        <div class="page-header header-filter" data-parallax="true" ></div>
+        <div class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                           <div class="profile">
+                                <div class="avatar">
+                                    <% if(User.photo){ %>
+                                    <img src="/images/users/<%= User.photo %>" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                    <% }else{ %>
+                                    <img src="/images/users/profile_avatar.png %>" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                    <% } %>
+                                </div>
+                                <div class="name">
+                                    <h3 class="title"><%= User.name %></h3>
+                                    <h5 class=" font-weight-bold " ><%= User.dept %></h5>                                    
+                                    <h6><%= User.gender %></h6>
+                                    <h6><%= User.dob %></h6>
+                                    <h6><%= User.phone %></h6>
+                                    <h6><%= User.email %></h6>
+                                    <a class="btn btn " href="#">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-facebook"></i>
+                                        </span>
+                                    </a>
+                                    <a class="btn btn " href="#">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </span>
+                                    </a>
+                                    <a class="btn btn " href="#">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-google"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description text-center pb-">
+                        <a class="btn btn-primary btn-icon-split btn-sm mb-2" id="editProfileBtn" >
+                            <span class="icon text-white">
+                                <i class="fa-solid fa-gears"></i>
+                            </span>
+                            <span class="text ml-2">Edit Profile</span>
+                        </a>
+                    </div>
+
+                    <div class="description text-center pb-5">                        
+                    <% if (Candt){ %>
+                        <a class="btn btn-success btn-icon-split btn-sm mb-2" id="editCandidateBtn" candtId="<%= Candt._id %>" >
+                    <% }else{ %>
+                        <a class="btn btn-success btn-icon-split btn-sm mb-2" id="editCandidateBtn" candtId="<%= 'nil' %>" >
+                    <% } %>
+                            <span class="icon text-white">
+                                <i class="fa-solid fa-gears"></i>
+                            </span>
+                            <span class="text ml-2">Edit Candidature</span>
+                        </a>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/js/profile.js"> </script>
+
+<!--New Candidate Edit Modal-->
+<div class="modal fade" id="newCandidateEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit your Candidature </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <% if (Candt){ %>
+                <form class="user" action="/candidate/update/<%= Candt._id %>" method="POST" enctype="multipart/form-data">                    
+                    <div class="row mb-3">                    
+                        <div class="col-md-12">
+                            <center>
+                                <div class="col-md-8">
+                                    <img id="candtPhotoPrev" class="img-fluid" 
+                                        alt="candidate's Image" srcset="" 
+                                        style="border-radius: 10px; height: 50%; width: 45%;">
+                                                                    
+                                </div>
+                                <label for="candtPhotoInp" class="candtPhotoInpLabel btn btn-primary btn-sm mt-2">
+                                    <input type="file" name="photo" id="candtPhotoInp" >
+                                    <span>Change Poster</span>
+                                </label>
+                            </center>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="label" for="phone">Campaign Phone No.</label>
+                                <input type="tel" name="phone" id="candtEditPhone" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="label" for="email">Campaign Email</label>
+                                <input type="email" name="email" id="candtEditMail" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="label" for="manifesto">Manifesto</label>
+                                <textarea name="manifesto" id="candtEditManifesto" cols="50" rows="10" 
+                                            placeholder="Please write down your Manifesto here" required></textarea>
+                            </div>
+                        </div>                                          
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form> 
+                <% }else { %>
+                <h3 class="text-warning text-center"> This Voter is not yet a Contestant in this Election!</h3>   
+                <% } %>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<!--Profile Edit Modal-->
+<div class="modal fade" id="profileEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="/voter/edit/<%= User._id %>" method="POST" enctype="multipart/form-data">
+                    <div class="row mb-3">                    
+                        <div class="col-md-12">
+                            <center>
+                                <div class="col-md-8">
+                                    <img id="userPhotoPrev" class="img-fluid" 
+                                        alt="user's Image" srcset="" 
+                                        style="border-radius: 10px; height: 50%; width: 45%;">
+                                                                       
+                                </div>
+                                <label for="userPhotoInp" class="userPhotoInpLabel btn btn-primary btn-sm mt-2">
+                                    <input type="file" name="photo" id="userPhotoInp" >
+                                    <span>Change Photo</span>
+                                </label>
+                            </center>
+                        </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="name">Full Name</label>
+                                      <input type="text" name="name" id="userEditName" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="dept">Department</label>
+                                    <select name="dept" class="form-control" id="userEditDept">
+                                        <option id="Computer">Computer</option>
+                                        <option id="Physics">Physics</option>
+                                        <option id="Mathematics">Mathematics</option>
+                                        <option id="Engineering">Engineering</option>
+                                        <option id="Medicine & Surgery">Medicine & Surgery</option>
+                                        <option id="Mining">Mining</option>
+                                        <option id="Architecture">Architecture</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="phone">Phone No.</label>
+                                      <input type="tel" name="phone" id="userEditPhone" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="email">Email/Username</label>
+                                      <input type="email" name="email" id="userEditMail" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12 pb-1">
+                                <div class="form-group">
+                                      <label class="label" for="dob">Date of Birth</label>
+                                      <input type="date" name="dob" id="userEditDob" class="form-control">
+                                  </div>
+                            </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+                </form>    
+        </div>
+    </div>
+</div>

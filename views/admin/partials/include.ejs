@@ -1,0 +1,64 @@
+
+<script>
+    import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
+
+    function fake_details(){
+
+        return {
+            id: faker.datatype.uuid(),
+            photo: faker.image.avatar(),
+            dob: faker.date.birthdate(),
+            email: faker.internet.email(),
+            firstName: faker.name.firstName(),
+            otherName: faker.name.lastName(),
+            gender: faker.name.sexType()
+        }
+
+    }
+
+    
+    $(document).ready(function() {
+        $('#table, .table, #example').DataTable();
+        
+            let obj = [];
+
+            let object1 = {
+            id: 1,
+            name: 'McClane',
+            f_id: 'hsdyhvhhxhsdfgjkj'
+            };
+
+            let object2 = {
+            id: 2,
+            name: 'Trassh',
+            f_id:'ahhriyerggf'
+            };
+
+            
+            
+
+
+            
+
+    });
+
+
+
+</script>
+
+
+<!--datatable-->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/js/admin.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+<script src="/js/voter.js"></script>

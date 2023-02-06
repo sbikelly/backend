@@ -1,0 +1,195 @@
+
+
+    
+    <!-- Summary Row -->
+    <div class="row m-5 ">
+
+        <!-- Positions Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Positions Available</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= positions.length; %></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidates Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Candidates Applied</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= candidates.length; %></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voter's Card --><div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Voters</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Users.length; %></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voted Card -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Voted</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><%= Voted.length; %></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mt-5 mr-5 ml-5">
+        <div class="col-md-10">
+            <h1 class="text-dark text-center mb-2 text-gray-800">
+                <strong>
+                    <%= Electn.title %>
+                </strong>
+            </h1>
+        </div>
+        <a href="/voter/index" class="d-none d-sm-inline-block btn  btn-primary">
+            <i class="fas fa-mail-bulk text-white-100"></i> My Vote</a>
+    </div>
+    <hr>
+
+
+    <div class="row m-5">
+    <!--Position Result statistic Card-->
+    <% positions.forEach(position => { %>                            
+                <div class="col-md-">
+                    <div class="card shadow-sm ml-2 mr-3 mb-5" width="100" >
+                    
+                        <div class="card-header  py-3">
+                            <h3 class="m-0 font-weight-bold text-dark text-center ">
+                                <strong>
+                                    <%= position.name  %>
+                                </strong>
+                                <input type="hidden" id="text_pId" value="<%= position._id  %>">
+                            </h3>
+                        </div>
+                        <div class="card-body" >
+                            <div class="row">
+                                
+                        <% candidates.forEach(candidate => { 
+
+                                        var totalVotes = Voted.length;
+                                        var totalCandidates = 0;
+                                        
+                                        if(position._id == candidate.p_id ){ 
+                                            
+                                            totalCandidates++;
+                                            var x = 0;
+                                    
+                                        %>
+                                        <div class="col-md-6">
+                                            <div class="card shadow-lg m-3">                                                    
+                                                <div class="card-body">
+                                                    <!--input type="hidden" name="cId" value="<%= candidate._id %>"-->
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img src="/images/candidates/<%= candidate.photo %>" class="img-fluid" 
+                                                                alt="candidate's Image" style="border-radius: 10px;" >
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-header text-center h4">
+                                                                <div class="col-sm-11">
+                                                                    <Strong><%= candidate.name %></Strong>                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <h1 class="text-center text-white bg-gradient-success mt-4 mb-4" 
+                                                                    style="border-radius: 50%;">
+                                                                        <strong>
+                                                                            <% 
+                                                                                Votes.forEach(vo =>{
+                                                                                    if(vo.c_id == candidate._id){
+                                                                                        x++;
+                                                                                    }
+                                                                                })
+
+                                                                                var percentage = Math.round((x / totalVotes) * 100);
+                                                                                var pcntage = percentage +"%";
+                                                                            %>
+                                                                            <%= x; %>
+                                                                        </strong>
+                                                                    </h1>
+                                                                </div>
+                                                                <div>                                                                    
+                                                                    <h4 class="small font-weight-bold">Vote Earned <span
+                                                                        class="float-right"><%= pcntage; %></span></h4>
+                                                                    <div class="progress mb-4">
+                                                                        <div class="progress-bar bg-success" role="progressbar" style="width: <%= pcntage; %>"
+                                                                            aria-valuenow="<%= percentage; %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                                
+                                    <%  } 
+                                });
+                                %>
+                                
+                            </div>
+                        </div>
+                        <div class="card-footer">                            
+                            
+                        </div> 
+                    </div>
+                </div>
+            <% 
+    }); %>
+
+    </div>
+    <!--end position row-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- chart plugins -->
+<script src="/vendor/chart.js/Chart.min.js"></script>
+
+<!-- custom charts scripts -->
+<script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script>

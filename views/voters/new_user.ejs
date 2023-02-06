@@ -1,0 +1,23 @@
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+<body>
+  <%- include("../partials/nav.ejs") %>
+
+  <div class="create-user content">
+    <form action="/users" method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="date" name="dob" required>
+      <label for="gender">Gender:</label>
+      <input type="text" id="gender" name="gender" required>
+      <label for="dept">Department: </label>
+      <input type="text" id="dept" name="dept" required>
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <%- include("../partials/footer.ejs") %>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item"><a href="/voters">Voters</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Voter Details</li>
+        </ol>
+    </nav>
+    <div class="profile-page">
+
+        <div class="page-header header-filter" data-parallax="true" ></div>
+        <div class="main main-raised">
+            <div class="profile-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                           <div class="profile">
+                                <div class="avatar">
+                                    <img src="<%= voter.photo %>" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                </div>
+                                <div class="name">
+                                    <h3 class="title"><%= voter.name %></h3>
+                                    <h5 class=" font-weight-bold " ><%= voter.dept %></h5>                                    
+                                    <h6><%= voter.gender %></h6>
+                                    <h6><%= voter.dob %></h6>
+                                    <h6><%= voter.phone %></h6>
+                                    <h6><%= voter.email %></h6>
+                                    <a class="btn btn " href="#">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-facebook"></i>
+                                        </span>
+                                    </a>
+                                    <a class="btn btn " href="#">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </span>
+                                    </a>
+                                    <a class="btn btn " href="#">
+                                        <span class="icon">
+                                            <i class="fa-brands fa-google"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description text-center pb-5">
+                        <a href="#" data-toggle="modal" data-target="#newCandidateModal" 
+                            class="btn btn-primary btn-icon-split mb-2" id="addButton" >
+                            <span class="icon text-white">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </span>
+                            <span class="text ml-2">Make Candidate</span>
+                        </a>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+ <!--New Candidate Modal-->
+ <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">Add New Candidate </h5>
+             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">×</span>
+             </button>
+         </div>
+         <div class="modal-body">
+             <form class="user" action="/candidate/new" method="POST">                    
+                 <div class="row mb-3">
+                    <input type="hidden" name="uId" value="<%= voter._id %>">
+                    <div class="col-md-12 mb-2">
+                        <label class="label" for="pId">Choose Election</label>
+                        <select name="eId" class="form-control" required>
+                            <% if (Electn.length > 0) { %>
+                                <% Electn.forEach(electn => { %>
+                                    <option value="<%= electn._id  %>"><%= electn.title  %></option>
+    
+                                <% }) %>
+                            <% } 
+                            else { %>
+                                <option> No Election Created!!!</option>
+                            <% } %> 
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                         <label class="label" for="pId">Positions</label>
+                         <select name="pId" class="form-control" required>
+                             <% if (positions.length > 0) { %>
+                                 <% positions.forEach(position => { %>
+                                     <option value="<%= position._id  %>"><%= position.name  %></option>
+     
+                                 <% }) %>
+                             <% } 
+                             else { %>
+                                 <option> Positions not available</option>
+                             <% } %> 
+                         </select>
+                     </div>
+                     <div class="col-md-12">
+                         <div class="form-group">
+                               <label class="label" for="name">Full Name</label>
+                               <input type="text" name="name" value="<%= voter.name %>" 
+                                class="form-control" required>
+                           </div>
+                     </div>
+                     <div class="col-md-12">
+                         <div class="form-group">
+                             <select name="gender" class="form-control" required>
+                                <option selected><%= voter.gender %></option>
+                                 <option>Male</option>
+                                 <option>Female</option>
+                             </select>
+                         </div>
+                     </div>
+                     <div class="col-md-12">
+                         <div class="form-group">
+                             <label class="label" for="dept">Department</label>
+                             <select name="dept" class="form-control" required>
+                                 <option selected><%= voter.dept %></option>
+                                 <option>Computer</option>
+                                 <option>Physics</option>
+                                 <option>Mathematics</option>
+                                 <option>Engineering</option>
+                                 <option>Medicine & Surgery</option>
+                                 <option>Mining</option>
+                                 <option>Architecture</option>
+                               </select>
+                         </div>
+                     </div>
+                     <div class="col-md-12">
+                         <div class="form-group">
+                               <label class="label" for="phone">Phone No.</label>
+                               <input type="tel" name="phone" value="<%= voter.phone %>" 
+                                    class="form-control" required>
+                           </div>
+                     </div>
+                     <div class="col-md-12">
+                         <div class="form-group">
+                               <label class="label" for="email">Email/Username</label>
+                               <input type="email" name="email" value="<%= voter.email %>" 
+                               class="form-control" required>
+                           </div>
+                     </div>
+                     <div class="col-md-12 pb-1">
+                         <div class="form-group">
+                               <input type="hidden" name="dob" value="<%= voter.dob %>" 
+                               class="form-control" required>
+                           </div>
+                     </div>                                             
+                 </div>
+         </div>
+         <div class="modal-footer">
+             <input type="submit" class="btn btn-primary" value="Submit">
+             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+         </div>
+     </form>    
+     </div>
+ </div>
+</div>

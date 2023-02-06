@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../partials/head.ejs'); %>
+    <body >
+
+
+        <container class="content" id="container">
+        <%- include('../partials/nav.ejs'); %>
+        <div >
+            <div class="card">
+                <div class="card-title"><h2>Users List</h2></div>
+                <div class="card-body">
+                    <a class="btn btn-md btn-primary">Add User</a>
+                    <div id="userList">
+                        <table>
+                            <thead>
+                                <th>id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
+                                <th>tools</th>
+                            </thead>
+                            <tbody>
+                                <% if (users.length > 0) { %>
+                                    <% users.forEach(user => { %>
+                                        <tr>
+                                            <td><%= user.id %></td>
+                                            <td><%= user.name %></td>
+                                            <td><%= user.email %></td>
+                                            <td><%= user.gender %></td>
+                                            <td><%= user.dob %></td>
+                                            <td>
+                                                <a class="single btn btn-sm-info" href="/users/<%= user._id %>">
+                                                    View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                  <% } else { %>
+                                    <p>There are no blogs to display...</p>
+                                  <% } %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../partials/footer.ejs'); %>
+    </container>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Faculties</li>
+        </ol>
+    </nav>
+
+    
+    <div class="card shadow mb-">
+        <div class="card-header py-">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <a href="#" data-toggle="modal" data-target="#facultyModal" 
+                    class="btn btn-primary btn-icon-split mb-2">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">New Faculty</span>
+                </a>
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>                                    
+                    <tbody>
+                        
+                        <% if (faculties.length > 0) { 
+                            var i = 1;
+                            faculties.forEach(faculty => { 
+                        %>
+                        <tr>
+                            <td><%= i++ %></td>
+                            <td><%= faculty.name %></td>
+                            <td>
+                                <center>
+                                    <a href="#" data-toggle="modal" data-target="#editFacultyModal" 
+                                        onclick="faculty_edit('<%= faculty._id %>', '<%= faculty.name %>')" class="btn btn-primary">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <a class="btn btn-danger" href="/faculty/delete/<%= faculty._id %>">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">Delete</span>
+                                    </a>
+                                </center>
+                            </td>
+                        </tr>
+                    <% }) %>
+                  <% } else { %>
+                    <p>There are no faculties to display... </p>
+                  <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<script>
+
+    /*=========Begin Populate edit Department Modal=========*/
+       
+
+    function faculty_edit(id, name){
+        
+        $('#editF_id').val(id);
+        $('#editF_name').val(name);
+
+    }
+
+    /*=========End Populate Edit Department Modal=========*/
+
+
+</script>

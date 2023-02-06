@@ -1,0 +1,74 @@
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Positions</li>
+        </ol>
+    </nav>
+
+    
+    <div class="card shadow mb-">
+        <div class="card-header py-">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <a href="#" data-toggle="modal" data-target="#positionModal" 
+                    class="btn btn-primary btn-icon-split mb-2">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">New Position</span>
+                </a>
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>                                    
+                    <tbody>
+                        
+                        <% if (positions.length > 0) { %>
+                            <% positions.forEach(position => { 
+                                var i = 0;
+                                %>
+                        <tr>
+                            <td><%= i+1 %></td>
+                            <td><%= position.name %></td>
+                            <td>
+                                <center>
+                                    <a href="#" data-toggle="modal" data-target="#editPositionModal" 
+                                    class="btn btn-primary">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Edit</span>
+                                </a>
+                                <a class="btn btn-danger" href="/position/delete/<%= position._id %>">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    <span class="text">Delete</span>
+                                </a>
+                                </center>
+                            </td>
+                        </tr>
+                    <% }) %>
+                  <% } else { %>
+                    <p>There are no position to display... </p>
+                  <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->

@@ -1,0 +1,150 @@
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Departments</li>
+        </ol>
+    </nav>
+
+
+    <!--content Body-->
+    <div class="card shadow mb-">
+        <div class="card-header py-">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <a href="#" id="newDeptBtnn" onclick="load_faculties('#newDeptFaculty')" data-toggle="modal" data-target="#departmentModal"
+                    class="btn btn-primary btn-icon-split mb-2">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">New Department</span>
+                </a>
+            </h6>
+        </div>
+        <div id="someID"></div>
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Faculty</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>                                    
+                    <tbody>
+                        
+                        <% if (departments.length > 0) { 
+                            var i = 1;
+                            departments.forEach(department => {
+                        %>
+                        <tr>
+                            <td><%= i++ %></td>
+                            <td><%= department.name %></td>
+                            <td><%= department.f_name %></td>
+                            <td>
+                                <center>
+                                    <a href="#" data-toggle="modal" data-target="#editDepartmentModal" class="btn btn-primary"
+                                        onclick="dept_edit('<%= department._id %>','<%= department.f_id %>', '<%= department.name %>');" >
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text"></span>
+                                    </a>
+                                    <a class="btn btn-danger" href="/department/delete/<%= department._id %>">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text"></span>
+                                    </a>
+                                </center>
+                            </td>
+                        </tr>
+                    <% }); %>
+                  <% } else { %>
+                    <p>There are no department to display... </p>
+                  <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    function getD(){
+
+    }
+    
+    /*=========Begin Populate edit Department Modal=========*/
+       
+
+    function dept_edit(id, f_id, name){
+        
+        $('#editDeptId').val(id);
+        $('#editDeptName').val(name);
+        load_faculties('#editDeptFaculty');
+        $('#editDeptFaculty option[value='+f_id+']').prop('selected', true);
+
+    }
+
+    function create_dept(){
+        
+        var f_id = $('#newDeptFaculty').find(':selected').val();
+        var f_name = $('#newDeptFaculty').find(':selected').text();
+        var name = $('#newDeptName').val();
+
+        $.post("/department/new",
+        {
+            f_id, f_name, name
+        },
+        function(data,status){
+            
+            if(status == "success"){                
+                location.reload(true);
+                alert('Added successfully');
+            }
+            
+        });
+        
+    }
+
+
+    function update_dept(){
+
+        var id = $('#editDeptId').val();
+        var f_id = $('#editDeptFaculty').find(':selected').val();
+        var f_name = $('#editDeptFaculty').find(':selected').text();
+        var name = $('#editDeptName').val();
+
+        $.post("/department/update",
+        {
+          id, f_id, f_name, name
+        },
+        function(data,status){
+            
+            if(status == "success"){                
+                location.reload(true);
+                alert('update successful');
+            }
+            
+        });
+         
+    }
+
+    /*=========End Populate Edit Department Modal=========*/
+
+
+    $(document).ready(function () {
+
+      
+        
+    });
+</script>
+<!-- /.container-fluid -->

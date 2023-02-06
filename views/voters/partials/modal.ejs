@@ -1,0 +1,271 @@
+<!-- logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--change password styles-->
+<style>
+    ul, li {
+        margin:0;
+        padding:0;
+        list-style-type:none;
+    }
+    #pswd_info {
+        position:absolute;
+        bottom:-75px;
+        bottom: -115px\9; /* IE Specific */
+        width:250px;
+        padding:15px;
+        background:#fefefe;
+        font-size:.875em;
+        border-radius:5px;
+        box-shadow:0 1px 3px #ccc;
+        border:1px solid #ddd;
+    }
+    #pswd_info h4 {
+        margin:0 0 10px 0;
+        padding:0;
+        font-weight:normal;
+    }
+    #pswd_info::before {
+        content: "\25B2";
+        position:absolute;
+        top:-12px;
+        left:45%;
+        font-size:14px;
+        line-height:14px;
+        color:#ddd;
+        text-shadow:none;
+        display:block;
+    }
+    .invalid {
+        padding-left:22px;
+        line-height:24px;
+        color:#ec3f41;
+    }
+    .notMatch {
+        border:1px solid #ec3f41;
+        color:#ec3f41;
+    }
+    .valid {
+        padding-left:22px;
+        line-height:24px;       
+        color:#3a7d34;
+    }
+    .match {
+        border:1px solid #3a7d34;        
+        color:#3a7d34;
+    }
+    #pswd_info {
+        display:none;
+    }
+</style>
+
+<script src="/js/voter.js"></script>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button class="close" type="button" data-dismiss="modal"  aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form action="/change/pass" method="post">
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="userOldPass" class="label">Current Password</label>
+                                    <input type="password" name="userOldPass" id="userOldPass" class="form-control notMatch" required>
+                                </div>                            
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="userNewPass" class="label">New Password</label>
+                                    <input type="password" name="userNewPass" id="userNewPass" class="form-control notMatch" required>                        
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="confirmUserNewPass" class="label">Re-enter New Password</label>
+                                    <input type="password" name="confirmUserNewPass" id="confirmUserNewPass" class="form-control notMatch" required>
+                                    <div id="confirmUserNewPassTxt"></div>
+                                </div>
+                            </div>
+    
+                            <div id="pswd_info">
+                                <h4>Password must meet the following requirements:</h4>
+                                <ul>
+                                    <li id="capital" class="invalid">
+                                        <i class="fa fa-remove" aria-hidden="true"></i>
+                                        At least <strong>one capital letter</strong>
+                                    </li>
+                                    <li id="number" class="invalid">
+                                        <i class="fa fa-remove" aria-hidden="true"></i>
+                                        At least <strong>one number</strong>
+                                    </li>
+                                    <li id="length" class="invalid">
+                                        <i class="fa fa-remove" aria-hidden="true"></i>
+                                        Be at least <strong>8 characters</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" id="changePassBtn" value="Submit" disabled >
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<!--New Election Modal-->
+<div class="modal fade" id="electionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Election</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="/new_election" method="POST">
+                    <div class="form-group">
+                        <label for="title" class="label">Title:</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Election Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="label">Description:</label>
+                        <textarea name="name" id="name" class="form-control" cols="20" rows="8" placeholder="Election Descriptiom"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="label" for="gender">Status:</label>
+                        <select name="status" class="form-control" disabled>
+                            <!--option selected disabled>Select</option-->
+                            <option>inActive</option>
+                            <option>Active</option>
+                          </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+
+
+</div>
+
+<!--New Voter Modal-->
+<div class="modal fade" id="voterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Voter</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" action="/new_voter" method="POST">
+                    <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="name">Full Name</label>
+                                      <input type="text" name="name" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="gender">Gender</label>
+                                    <select name="gender" class="form-control">
+                                        <!--option selected disabled>Select</option-->
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="dept">Department</label>
+                                    <select name="dept" class="form-control">
+                                        <!--option selected disabled>Select</option-->
+                                        <option>Computer</option>
+                                        <option>Physics</option>
+                                        <option>Mathematics</option>
+                                        <option>Engineering</option>
+                                        <option>Medicine & Surgery</option>
+                                        <option>Mining</option>
+                                        <option>Architecture</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="phone">Phone No.</label>
+                                      <input type="tel" name="phone" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="email">Email/Username</label>
+                                      <input type="email" name="email" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="label" for="password">Password</label>
+                                      <input type="password" name="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-12 pb-1">
+                                <div class="form-group">
+                                      <label class="label" for="dob">Date of Birth</label>
+                                      <input type="date" name="dob" class="form-control">
+                                  </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                      <label class="label" for="photo">Photo</label>
+                                      <input type="file" name="photo" class="form-control">
+                                  </div>
+                            </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+                </form>    
+        </div>
+    </div>
+</div>
+

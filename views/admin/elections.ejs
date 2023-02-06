@@ -1,0 +1,127 @@
+
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    
+    <div class="container m- mt-0 p-1 pt-">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Elections</li>
+            </ol>
+        </nav>
+        <a href="#" data-toggle="modal" data-target="#electionModal" class="btn btn-primary">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">New Election</span>
+        </a>
+
+        <div class="card">
+            <div class="card-body">
+                <table id="table" class="table table-bordered table-striped table-hover .table-responsive ">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Title</th>
+                            <th>Created On</th>
+                            <th>Status</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (elections.length > 0) { %>
+                            <% elections.forEach(electn => { 
+                                var i=0;
+                                %>
+                                <tr>
+                                    <td><% i++ %> </td>
+                                    <td><%= electn.title %> </td>
+                                    <td><%= electn.created_on %></td>
+                                    <td>
+                                        <center>
+                                            <% if (electn.status == "Active") { %>
+                                                <a href="/election/update/<%= electn._id %>/inActive" 
+                                                    class="btn btn-success btn-sm" data-toggle="tooltip" 
+                                                    title="Deactivate this election">
+        
+                                                    <span class="icon text-white">
+                                                        <!--i class="fas fa-power-off"></i-->
+                                                    </span>
+                                                    <span class="text text-white">Active</span>
+        
+                                                </a>
+                                            <% } else{ %>
+                                                <a href="/election/update/<%= electn._id %>/Active" 
+                                                    class="btn btn-warning btn-sm" data-toggle="tooltip"  
+                                                    title="Activate this election">
+    
+                                                    <span class="icon text-white">
+                                                        <!--i class="fas fa-power-off"></i-->
+                                                    </span>
+                                                    <span class="text text-white">inActive</span>
+    
+                                                </a>
+                                            <% } %>
+                                        </center>
+                                    </td>
+                                    <td>
+                                        <center>
+                                            <a href="/election/<%= electn._id %>" class="btn btn-sm btn-primary text-center">
+                                                <span class="icon text-white">
+                                                    <i class="fa fa-edit"></i>
+                                                </span>
+                                                <span class="text">Details</span>
+                                            </a>
+                                            <a  id="eReportBtn" href="/election/report/dghhdfs" class="btn btn-sm btn-info text-center">
+                                                <span class="icon text-white">
+                                                    <i class="fa fa-eye"></i>
+                                                </span>
+                                                <span class="text">Report</span>                                     
+                                             </a>
+                                             <a href="/election/delete/<%= electn._id %>" class="btn btn-sm  btn-danger text-center">
+                                                <span class="icon text-white">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Delete</span>                                               
+                                             </a>
+                                        </center>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <p>There are no elections to display... </p>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<script>
+
+function download() {
+  if (!blob) return;
+  var url = window.URL.createObjectURL(blob);
+  a.href = url;
+  a.download = 'test.pdf';
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
+   /*
+   $('#eReportBtn').on('click', function(){
+        
+        $.post('/election/report/jksdfjhg',
+        function(doc){
+            alert(JSON.stringify(doc));
+        });
+   });
+*/
+   
+   
+   </script>
+    
+
+</div>
+<!-- /.container-fluid -->

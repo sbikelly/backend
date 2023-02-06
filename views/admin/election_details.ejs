@@ -1,0 +1,154 @@
+
+    
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="text-dark text-center mb-2 text-gray-800 text-capitalize">
+        <strong>
+            <%= Electn.title %>
+        </strong>
+    </h1>
+
+
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item"><a href="/elections">Elections</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Election Details</li>
+            </ol>
+        </nav>
+        <!--a href="#" data-toggle="modal" data-target="#newCandidateModal" 
+            class="btn btn-primary btn-icon-split mb-2" id="addButton" >
+            <span class="icon text-white-50">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">Add Candidate</span>
+        </a--> 
+                    
+        <% positions.forEach(position => { %>
+            <% //if (position.e_id == Electn._id) { %>                            
+                <div class="card shadow-sm ml-1 mr-3 mb-1" >
+                    
+        
+                    <div class="card-header  py-">
+                        <h5 class="m-0 font-weight-bold text-dark text-center text-capitalize">
+                            <strong>
+                                <%= position.name  %>
+                            </strong>
+                            <input type="hidden" id="text_pId" value="<%= position._id  %>">
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                         
+                        <div class="row">
+                                                                               
+                        <% candidates.forEach(candidate => { %>
+                            <% if(position._id == candidate.p_id && candidate.e_id == Electn._id){ %>
+                            <div class="col-md-6">
+                                <div class="card shadow-lg m-">                                                    
+                                    <div class="card-body">
+                                        <input type="hidden" name="cId" value="<%= candidate._id %>">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img src="/images/candidates/<%= candidate.photo %>" class="img-fluid" 
+                                                    alt="candidate's Image" srcset="" style="border-radius: 10px;">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-header text-center text-capitalize">
+                                                    <Strong><%= candidate.name %></Strong>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                        Gender: <%= candidate.gender %>
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                        Dept: <%= candidate.dept %>
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                        D.O.B: <%= candidate.dob %>
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                        Phone: <%= candidate.phone %>
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                        Email: <%= candidate.email %>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <a href="#" data-toggle="modal" data-target="#manifestoModal<%= candidate._id %>" 
+                                                class="btn btn-primary btn-icon-split mb-2 col-sm-10" >
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-book-open"></i>
+                                                </span>
+                                                <span class="text">Manifesto</span>
+                                            </a>
+                                            <div class="modal fade" id="manifestoModal<%= candidate._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title text-center" id="exampleModalLabel"><strong><%= candidate.name %>'s Manifesto</strong> </h4>
+                                                            <button class="close h3" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="text text-justify">
+                                                                <%= candidate.manifesto %>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                                         
+                                            <a href="/candidate/delete/<%= candidate._id %>/<%= candidate.e_id %>" class="btn col-sm-2" >
+                                                <span class="icon text-dark">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                                                
+                                <%  } 
+                            });
+                        %>
+                            
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <label>Created: <%= position.createdAt %></label>
+                        <label>Updated: <%= position.updatedAt %></label>
+                    </div>
+                </div>
+
+            <% /*} 
+                else { %>
+                    <p>There are no positions to display...</p>
+            <% } */%>
+        <% }); %>
+        
+    </div>
+    
+
+</div>
+<!-- /.container-fluid -->
+
+
+
