@@ -66,7 +66,7 @@ userSchema.statics.login = async function(email, password, res) {
     returnData.status = 404;
     returnData.msg = "all fields must be filled!!!";
 
-    res.send(returnData);
+    //res.send(returnData);
 
   }else{
 
@@ -75,28 +75,33 @@ userSchema.statics.login = async function(email, password, res) {
     if (!user) {
 
       returnData.status = 404;
-      returnData.msg = "email not found!!!";
+      returnData.msg = "Email not found!!!";
 
-      res.send(returnData);
+      //res.send(returnData);
 
     }else{
 
       const match = await bcrypt.compare(password, user.password)
 
       if (!match) {
-        returnData.status = 404;
-        returnData.msg = "Incorrect password";
 
-        res.send(returnData);
+        returnData.status = 404;
+        returnData.msg = "Invalid Password!!!"       
+
+        //res.send(returnData);
 
       }else{
 
-        return user;
+        returnData.status = 202;
+        returnData.msg = "login successful";
+        returnData.user = user;
         
       }
 
     }
   }
+  
+  return returnData;
 }
 
 userSchema.statics.check_password = async function(user, password){

@@ -51,11 +51,16 @@ const login_page = async(req, res) => {
 
 // login a user
 const loginUser = async (req, res) => {  
+
   const {email, password} = req.body;
+
   try {
-    const user = await User.login(email, password, res);
+
+    const loginData = await User.login(email, password, res);
     
-    if(user){
+    if(loginData.status !== 404 ){ //checking the authentication status
+      
+      const user = loginData.user;
       session = req.session;
       session.user = user;
 
@@ -70,8 +75,17 @@ const loginUser = async (req, res) => {
         voter_get(req, res);
       }
     }else{
-      res.send('invalid Username or password')
+
+      res.render('index', 
+        { 
+          title: 'sign in Error!',
+          msg: loginData.msg,
+          layout: 'index'
+        }
+      );
+
     }
+    
   } catch (error) {
     //res.status(400).send({error: error.message})
     console.log('==login error == '+error);
